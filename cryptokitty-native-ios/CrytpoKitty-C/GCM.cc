@@ -92,8 +92,8 @@ coder::ByteArray GCM::encrypt(const coder::ByteArray& P, const coder::ByteArray&
 
     //std::cout << "encrypt P = " << P << std::endl;
     // l = (n - 1)128 + u
-    int n = P.getLength() / 16;
-    int u = P.getLength() % 16;
+    size_t n = P.getLength() / 16;
+    size_t u = P.getLength() % 16;
     if (u == 0) {
         u = 16;
         n--;
@@ -160,14 +160,14 @@ coder::ByteArray GCM::GHASH(const coder::ByteArray& H, const coder::ByteArray& A
         throw BadParameterException("Invalid hash sub-key");
     }
 
-    int m = A.getLength() / 16;
-    int v = A.getLength() % 16;
+    size_t m = A.getLength() / 16;
+    size_t v = A.getLength() % 16;
     if (v == 0) {
         v = 16;
         m--;
     }
-    int n = C.getLength() / 16;
-    int u = C.getLength() % 16;
+    size_t n = C.getLength() / 16;
+    size_t u = C.getLength() % 16;
     if (u == 0) {
         u = 16;
         n--;
