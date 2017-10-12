@@ -16,13 +16,13 @@ FOUNDATION_EXPORT const unsigned char cryptokitty_native_iosVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <cryptokitty_native_ios/PublicHeader.h>
 
-#import <CryptoKitty_iOS/CKRSAPrivateKey.h>
-#import <CryptoKitty_iOS/CKRSAPublicKey.h>
-#import <CryptoKitty_iOS/CKRSAKeyPair.h>
-#import <CryptoKitty_iOS/CKRSAKeyPairGenerator.h>
-#import <CryptoKitty_iOS/CKSecureRandom.h>
-#import <CryptoKitty_iOS/CKSHA1.h>
-#import <CryptoKitty_iOS/CKSHA256.h>
-#import <CryptoKitty_iOS/CKPEMCodec.h>
-#import <CryptoKitty_iOS/CKRSACodec.h>
+#import <cryptokitty_native_ios/CKRSAPrivateKey.h>
+#import <cryptokitty_native_ios/CKRSAPublicKey.h>
+#import <cryptokitty_native_ios/CKRSAKeyPair.h>
+#import <cryptokitty_native_ios/CKRSAKeyPairGenerator.h>
+#import <cryptokitty_native_ios/CKSecureRandom.h>
+#import <cryptokitty_native_ios/CKSHA1.h>
+#import <cryptokitty_native_ios/CKSHA256.h>
+#import <cryptokitty_native_ios/CKPEMCodec.h>
+#import <cryptokitty_native_ios/CKRSACodec.h>
 
