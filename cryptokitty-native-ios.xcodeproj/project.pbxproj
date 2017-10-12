@@ -386,8 +386,8 @@
 		557D296A1F8E7D5B008606E3 /* cryptokitty-native-ios */ = {
 			isa = PBXGroup;
 			children = (
-				552062121F8EA7320015A9A9 /* CrytpoKitty-C */,
 				552062111F8EA69B0015A9A9 /* Wrappers */,
+				552062121F8EA7320015A9A9 /* CrytpoKitty-C */,
 				5520620E1F8EA66E0015A9A9 /* GMP */,
 				557D296B1F8E7D5B008606E3 /* cryptokitty_native_ios.h */,
 				557D296C1F8E7D5B008606E3 /* Info.plist */,
