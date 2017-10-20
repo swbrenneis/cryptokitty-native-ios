@@ -95,7 +95,7 @@ void Base64::encode(std::ostream& out) {
 
     int index = 0;
     int column = 0;
-    size_t length = data.getLength();
+    size_t length = data.length();
     while (index < length) {
         memset(b64, 0, 5);
         memset(triplet, 0, 3);

@@ -33,11 +33,11 @@ coder::ByteArray GCM::decrypt(const coder::ByteArray& C, const coder::ByteArray&
     coder::ByteArray ciphertext(C);
     if (appendTag) {
         uint32_t tagLength = tagSize / 8;
-        T = C.range(C.getLength() - tagLength, tagLength);
+        T = C.range(C.length() - tagLength, tagLength);
         ciphertext.truncate(tagLength);
     }
-    size_t n = ciphertext.getLength() / 16;
-    size_t u = ciphertext.getLength() % 16;
+    size_t n = ciphertext.length() / 16;
+    size_t u = ciphertext.length() % 16;
     if (u == 0) {
         u = 16;
         n--;
@@ -46,7 +46,7 @@ coder::ByteArray GCM::decrypt(const coder::ByteArray& C, const coder::ByteArray&
     coder::ByteArray H(cipher->encrypt(coder::ByteArray(16, 0), K));
 
     coder::ByteArray Y0;
-    if (IV.getLength() == 12) {
+    if (IV.length() == 12) {
         coder::ByteArray ctr(4, 0);
         ctr[3] = 0x01;
         Y0.append(IV);
@@ -68,7 +68,7 @@ coder::ByteArray GCM::decrypt(const coder::ByteArray& C, const coder::ByteArray&
     coder::ByteArray Pi;           // C(i);
     coder::ByteArray P;
 
-    if (ciphertext.getLength() > 0) {
+    if (ciphertext.length() > 0) {
         for (int i = 1; i <= n; ++i) {
             Yi = incr(Yi1);
             Ci = ciphertext.range((i-1)*16, 16);
@@ -77,7 +77,7 @@ coder::ByteArray GCM::decrypt(const coder::ByteArray& C, const coder::ByteArray&
             Yi1 = Yi;
         }
         Yi = incr(Yi1);
-        coder::ByteArray Cn(ciphertext.range(ciphertext.getLength()-u, u));
+        coder::ByteArray Cn(ciphertext.range(ciphertext.length()-u, u));
         P.append(Cn ^ (cipher->encrypt(Yi, K)).range(0, u));
     }
 
@@ -92,8 +92,8 @@ coder::ByteArray GCM::encrypt(const coder::ByteArray& P, const coder::ByteArray&
 
     //std::cout << "encrypt P = " << P << std::endl;
     // l = (n - 1)128 + u
-    size_t n = P.getLength() / 16;
-    size_t u = P.getLength() % 16;
+    size_t n = P.length() / 16;
+    size_t u = P.length() % 16;
     if (u == 0) {
         u = 16;
         n--;
@@ -102,7 +102,7 @@ coder::ByteArray GCM::encrypt(const coder::ByteArray& P, const coder::ByteArray&
     coder::ByteArray H(cipher->encrypt(coder::ByteArray(16, 0), K));
 
     coder::ByteArray Y0;
-    if (IV.getLength() == 12) {
+    if (IV.length() == 12) {
         coder::ByteArray ctr(4, 0);
         ctr[3] = 0x01;
         Y0.append(IV);
@@ -118,7 +118,7 @@ coder::ByteArray GCM::encrypt(const coder::ByteArray& P, const coder::ByteArray&
     coder::ByteArray Ci;           // C(i);
     coder::ByteArray C;
 
-    if (P.getLength() > 0) {
+    if (P.length() > 0) {
         for (int i = 1; i <= n; ++i) {
             Yi = incr(Yi1);
             Pi = P.range((i-1)*16, 16);
@@ -127,7 +127,7 @@ coder::ByteArray GCM::encrypt(const coder::ByteArray& P, const coder::ByteArray&
             Yi1 = Yi;
         }
         Yi = incr(Yi1);
-        coder::ByteArray Pn(P.range(P.getLength()-u, u));
+        coder::ByteArray Pn(P.range(P.length()-u, u));
         C.append(Pn ^ (cipher->encrypt(Yi, K)).range(0, u));
     }
 
@@ -156,18 +156,18 @@ const coder::ByteArray& GCM::getAuthTag() const {
 coder::ByteArray GCM::GHASH(const coder::ByteArray& H, const coder::ByteArray& A,
                                             const coder::ByteArray& C) const {
 
-    if (H.getLength() != 16) {
+    if (H.length() != 16) {
         throw BadParameterException("Invalid hash sub-key");
     }
 
-    size_t m = A.getLength() / 16;
-    size_t v = A.getLength() % 16;
+    size_t m = A.length() / 16;
+    size_t v = A.length() % 16;
     if (v == 0) {
         v = 16;
         m--;
     }
-    size_t n = C.getLength() / 16;
-    size_t u = C.getLength() % 16;
+    size_t n = C.length() / 16;
+    size_t u = C.length() % 16;
     if (u == 0) {
         u = 16;
         n--;
@@ -186,8 +186,8 @@ coder::ByteArray GCM::GHASH(const coder::ByteArray& H, const coder::ByteArray& A
         Xi1 = Xi;
     }
 
-    if (A.getLength() > 0) {
-        coder::ByteArray Am(A.range(A.getLength() - v, v));    // A(n)
+    if (A.length() > 0) {
+        coder::ByteArray Am(A.range(A.length() - v, v));    // A(n)
         coder::ByteArray pad(16-v, 0);
         Am.append(pad);
         Xi = multiply(Xi1 ^ Am, H);
@@ -202,8 +202,8 @@ coder::ByteArray GCM::GHASH(const coder::ByteArray& H, const coder::ByteArray& A
         Xi1 = Xi;
     }
 
-    if (C.getLength() > 0) {
-        coder::ByteArray Cn(C.range(C.getLength() - u, u));    // A(n)
+    if (C.length() > 0) {
+        coder::ByteArray Cn(C.range(C.length() - u, u));    // A(n)
         coder::ByteArray pad(16-u, 0);
         Cn.append(pad);
         Xi = multiply(Xi1 ^ Cn, H);
@@ -212,9 +212,9 @@ coder::ByteArray GCM::GHASH(const coder::ByteArray& H, const coder::ByteArray& A
     }
 
     coder::ByteArray ac;
-    coder::Unsigned64 al(A.getLength() * 8);
+    coder::Unsigned64 al(A.length() * 8);
     ac.append(al.getEncoded(coder::bigendian));
-    coder::Unsigned64 cl(C.getLength() * 8);
+    coder::Unsigned64 cl(C.length() * 8);
     ac.append(cl.getEncoded(coder::bigendian));
     Xi = multiply(Xi1 ^ ac, H);
 
@@ -229,7 +229,7 @@ coder::ByteArray GCM::GHASH(const coder::ByteArray& H, const coder::ByteArray& A
  */
 coder::ByteArray GCM::incr(const coder::ByteArray& X) const {
 
-    if (X.getLength() != 16) {
+    if (X.length() != 16) {
         throw BadParameterException("Illegal block size");
     }
 
@@ -248,7 +248,7 @@ coder::ByteArray GCM::incr(const coder::ByteArray& X) const {
  */
 coder::ByteArray GCM::multiply(const coder::ByteArray& X, const coder::ByteArray& Y) const {
 
-    if (X.getLength() != 16 || Y.getLength() != 16) {
+    if (X.length() != 16 || Y.length() != 16) {
         throw BadParameterException("Invalid multiplicand or multiplier size");
     }
 
@@ -319,7 +319,7 @@ void GCM::shiftBlock(coder::ByteArray& block) const {
 
 void GCM::setAuthenticationData(const coder::ByteArray& ad) {
 
-    /*if (ad.getLength() * 8 > A_MAX) {
+    /*if (ad.length() * 8 > A_MAX) {
         throw BadParameterException("GCM setAuthData: Invalid authentication data");
     }*/
 
@@ -329,7 +329,7 @@ void GCM::setAuthenticationData(const coder::ByteArray& ad) {
 
 void GCM::setAuthTag(const coder::ByteArray& tag) {
 
-    if (tag.getLength() * 8 != tagSize) {
+    if (tag.length() * 8 != tagSize) {
         throw BadParameterException("GCM setAuthTag: Invalid authentication tag");
     }
 

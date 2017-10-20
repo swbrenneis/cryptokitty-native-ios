@@ -32,7 +32,7 @@ void DERCodec::encodeAlgorithm(coder::ByteArrayOutputStream& out) {
 void DERCodec::encodeBitString(coder::ByteArrayOutputStream& out, const coder::ByteArray& bits) {
 
     out.write(BIT_STRING_TAG);
-    setLength(out, bits.getLength() + 1);
+    setLength(out, bits.length() + 1);
     out.write(0);
     out.write(bits);
 
@@ -41,7 +41,7 @@ void DERCodec::encodeBitString(coder::ByteArrayOutputStream& out, const coder::B
 void DERCodec::encodeInteger(coder::ByteArrayOutputStream& out, const coder::ByteArray& integer) {
 
     out.write(INTEGER_TAG);
-    setLength(out, integer.getLength());
+    setLength(out, integer.length());
     out.write(integer);
 
 }
@@ -49,7 +49,7 @@ void DERCodec::encodeInteger(coder::ByteArrayOutputStream& out, const coder::Byt
 void DERCodec::encodeOctetString(coder::ByteArrayOutputStream& out, const coder::ByteArray& octetstring) {
 
     out.write(OCTET_STRING_TAG);
-    setLength(out, octetstring.getLength());
+    setLength(out, octetstring.length());
     out.write(octetstring);
 
 }
@@ -57,7 +57,7 @@ void DERCodec::encodeOctetString(coder::ByteArrayOutputStream& out, const coder:
 void DERCodec::encodeSequence(coder::ByteArrayOutputStream& out, const coder::ByteArray& sequence) {
 
     out.write(SEQUENCE_TAG);
-    setLength(out, sequence.getLength());
+    setLength(out, sequence.length());
     out.write(sequence);
 
 }

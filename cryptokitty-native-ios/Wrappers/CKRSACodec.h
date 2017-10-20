@@ -20,6 +20,10 @@
 
 - (NSData*)getBlock;
 
+- (NSString*)getString;
+
 - (void)putBlock:(NSData*)block;
+
+- (void)putString:(NSString*)str;
 
 @end

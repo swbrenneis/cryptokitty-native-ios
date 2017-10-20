@@ -54,7 +54,7 @@ coder::ByteArray OAEPrsaes::decrypt(const RSAPrivateKey& K, const coder::ByteArr
     // b. If the length of the ciphertext C is not k octets, output
     //    "decryption error" and stop.
     size_t k = K.getBitLength() / 8;
-    size_t cLength = C.getLength();
+    size_t cLength = C.length();
     if (cLength != k) {
         throw DecryptionException();
     }
@@ -84,7 +84,7 @@ coder::ByteArray OAEPrsaes::emeOAEPDecode(size_t k, const coder::ByteArray& EM) 
     //    lHash = Hash(L), an octet string of length hLen
     coder::ByteArray lHash(digest->digest(label));
 
-    size_t hLen = lHash.getLength();
+    size_t hLen = lHash.length();
 
     // b. Separate the encoded message EM into a single octet Y, an octet
     //    string maskedSeed of length hLen, and an octet string maskedDB
@@ -128,7 +128,7 @@ coder::ByteArray OAEPrsaes::emeOAEPDecode(size_t k, const coder::ByteArray& EM) 
     
     bool found = false;
     size_t index = hLen;
-    while (!found && index < DB.getLength()) {
+    while (!found && index < DB.length()) {
         if (DB[index] == 0x01) {
             found = true;
         }
@@ -140,13 +140,13 @@ coder::ByteArray OAEPrsaes::emeOAEPDecode(size_t k, const coder::ByteArray& EM) 
         throw DecryptionException();				
     }
     coder::ByteArray PS(DB.range(hLen, index - hLen));
-    for (uint32_t i = 0; i < PS.getLength(); ++i) {
+    for (uint32_t i = 0; i < PS.length(); ++i) {
         if (PS[i] != 0) {
             throw DecryptionException();
         }
     }
 
-    return DB.range(found + 1, DB.getLength() - found - 1);
+    return DB.range(found + 1, DB.length() - found - 1);
 
 }
 
@@ -159,7 +159,7 @@ coder::ByteArray OAEPrsaes::emeOAEPEncode(size_t k, const coder::ByteArray&  M) 
     // b. Generate an octet string PS consisting of k - mLen - 2hLen - 2
     // zero octets.  The length of PS may be zero.
     uint32_t hLen = digest->getDigestLength();
-    size_t mLen = M.getLength();
+    size_t mLen = M.length();
     coder::ByteArray PS(k - mLen - (2 * hLen) - 2);
 
     // c. Concatenate lHash, PS, a single octet with hexadecimal value
@@ -175,7 +175,7 @@ coder::ByteArray OAEPrsaes::emeOAEPEncode(size_t k, const coder::ByteArray&  M) 
 
     // d. Generate a random octet string seed of length hLen.
     // The seed is provided to the constructor.
-    if (seed.getLength() != digest->getDigestLength()) {
+    if (seed.length() != digest->getDigestLength()) {
         throw BadParameterException("Invalid seed length");
     }
 
@@ -220,7 +220,7 @@ coder::ByteArray OAEPrsaes::encrypt(const RSAPublicKey& K, const coder::ByteArra
 
     uint32_t hLen = digest->getDigestLength();
     size_t k = K.getBitLength() / 8;
-    size_t mLen = P.getLength();
+    size_t mLen = P.length();
     if (mLen > k - (2 * hLen) - 2) {
         throw BadParameterException("Message too long");
     }
@@ -241,7 +241,7 @@ coder::ByteArray OAEPrsaes::encrypt(const RSAPublicKey& K, const coder::ByteArra
 
 void OAEPrsaes::setSeed(const coder::ByteArray& s) {
 
-    if (s.getLength() != digest->getDigestLength()) {
+    if (s.length() != digest->getDigestLength()) {
         throw BadParameterException("Invalid seed length");
     }
     seed = s;

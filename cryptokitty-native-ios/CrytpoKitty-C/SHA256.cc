@@ -74,7 +74,7 @@ coder::ByteArray SHA256::finalize(const coder::ByteArray& in) const {
     coder::ByteArray context(pad(in));
 
     // Split the message up into 512 bit chunks.
-    long n = context.getLength() / 64;
+    long n = context.length() / 64;
     // We need the chunk array to begin at index 1 so the indexing
     // works out below.
     Chunks chunks;
@@ -178,7 +178,7 @@ uint32_t SHA256::Maj(uint32_t x, uint32_t y, uint32_t z) const {
 coder::ByteArray SHA256:: pad(const coder::ByteArray& in) const {
 
     // Message size in bits - l
-    long l = in.getLength() * 8;
+    long l = in.length() * 8;
 
     /*
      * Pad the message such that k + 1 + l is congruent to
@@ -194,7 +194,7 @@ coder::ByteArray SHA256:: pad(const coder::ByteArray& in) const {
     // in order to make the message modulo 512, we add bytes until
     // the whole message, including the length encoding is an even
     // multiple of 64,
-    coder::ByteArray pad(64 - ((work.getLength() + 8) % 64));
+    coder::ByteArray pad(64 - ((work.length() + 8) % 64));
     work.append(pad);
     // Append the 64 bit encoded bit length
     coder::Unsigned64 l64(l);

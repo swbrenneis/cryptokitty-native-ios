@@ -30,8 +30,8 @@ GCMCodec::~GCMCodec() {
 void GCMCodec::decrypt(const coder::ByteArray& key, const coder::ByteArray& ad) {
 
     // The IV is the last 12 bytes of the provided text.
-    coder::ByteArray ciphertext(text.range(0, text.getLength() - 12));
-    coder::ByteArray iv(text.range(text.getLength() - 12));
+    coder::ByteArray ciphertext(text.range(0, text.length() - 12));
+    coder::ByteArray iv(text.range(text.length() - 12));
 
     try {
         GCM gcm(new AES(AES::AES256), true);    // Auth tag is appended

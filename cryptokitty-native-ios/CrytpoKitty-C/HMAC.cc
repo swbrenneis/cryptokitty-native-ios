@@ -57,19 +57,19 @@ unsigned HMAC::getDigestLength() const {
  */
 coder::ByteArray HMAC::getHMAC() {
 
-    if (K.getLength() == 0) {
+    if (K.length() == 0) {
         throw IllegalStateException("HMAC key not set");
     }
 
     // Pad or truncate the key until it is B bytes.
     coder::ByteArray k;
-    if (K.getLength() > B) {
+    if (K.length() > B) {
         k = hash->digest(K);
     }
     else {
         k = K;
     }
-    coder::ByteArray pad(B - k.getLength());
+    coder::ByteArray pad(B - k.length());
     k.append(pad);
     hash->reset();
 
@@ -86,7 +86,7 @@ coder::ByteArray HMAC::getHMAC() {
 
 void HMAC::setKey(const coder::ByteArray& k) {
 
-    if (k.getLength() < L) {
+    if (k.length() < L) {
         throw BadParameterException("Invalid HMAC key");
     }
 

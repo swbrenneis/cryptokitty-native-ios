@@ -89,7 +89,7 @@ coder::ByteArray SHA384::finalize(const coder::ByteArray& in) const {
     coder::ByteArray context(pad(in));
 
     // Split the message up into 1024 bit chunks.
-    long n = context.getLength() / 128;
+    long n = context.length() / 128;
     // We need the chunk array to begin at index 1 so the indexing
     // works out below.
     Chunks chunks;
@@ -191,7 +191,7 @@ uint64_t SHA384::Maj(uint64_t x, uint64_t y, uint64_t z) const {
 coder::ByteArray SHA384:: pad(const coder::ByteArray& in) const {
 
     // Message size in bits - l
-    uint64_t l = in.getLength() * 8;
+    uint64_t l = in.length() * 8;
 
     /*
      * Pad the message such that k + 1 + l is congruent to
@@ -207,15 +207,15 @@ coder::ByteArray SHA384:: pad(const coder::ByteArray& in) const {
     // in order to make the message modulo 1024, we add bytes until
     // the whole message, including the length encoding is an even
     // multiple of 128,
-    coder::ByteArray pad(128 - ((work.getLength() + 16) % 128));
+    coder::ByteArray pad(128 - ((work.length() + 16) % 128));
     work.append(pad);
-    //while ((work.getLength() + 8)  % 64 != 0) {
+    //while ((work.length() + 8)  % 64 != 0) {
     //    work.append(0); //pad with zeroes.
     //}
     // Append the 64 bit encoded bit length
     BigInteger l128(l);
     coder::ByteArray b128(l128.getEncoded());
-    pad = coder::ByteArray(16 - b128.getLength());
+    pad = coder::ByteArray(16 - b128.length());
     work.append(pad);
     work.append(b128);
     return work;

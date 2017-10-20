@@ -154,7 +154,7 @@ void AES::AddRoundKey(const Word *roundKey) {
  */
 void AES::Cipher(const coder::ByteArray& plaintext, const Word *keySchedule) {
 
-    if (plaintext.getLength() != Nb * 4) {
+    if (plaintext.length() != Nb * 4) {
         throw BadParameterException("AES Cipher: Invalid block size.");
     }
 
@@ -199,11 +199,11 @@ void AES::Cipher(const coder::ByteArray& plaintext, const Word *keySchedule) {
  */
 coder::ByteArray AES::decrypt(const coder::ByteArray& ciphertext, const coder::ByteArray& key) {
 
-    if (ciphertext.getLength() != Nb * 4) {
+    if (ciphertext.length() != Nb * 4) {
         throw BadParameterException("AES decrypt: Illegal ciphertext size");
     }
 
-    if (key.getLength() != keySize) {
+    if (key.length() != keySize) {
         throw BadParameterException("AES decrypt: Invalid key");
     }
 
@@ -229,11 +229,11 @@ coder::ByteArray AES::decrypt(const coder::ByteArray& ciphertext, const coder::B
  */
 coder::ByteArray AES::encrypt(const coder::ByteArray& plaintext, const coder::ByteArray& key) {
 
-    if (plaintext.getLength() != Nb * 4) {
+    if (plaintext.length() != Nb * 4) {
         throw BadParameterException("AES encrypt: Illegal plaintext size");
     }
 
-    if (key.getLength() != keySize) {
+    if (key.length() != keySize) {
         throw BadParameterException("AES encrypt: Invalid key");
     }
 
@@ -288,7 +288,7 @@ coder::ByteArray AES::encrypt(const coder::ByteArray& plaintext, const coder::By
  */
 void AES::InvCipher(const coder::ByteArray& ciphertext, const Word *keySchedule) {
 
-    if (ciphertext.getLength() != Nb * 4) {
+    if (ciphertext.length() != Nb * 4) {
         throw BadParameterException("AES InvCipher: Invalid block size.");
     }
 
@@ -433,7 +433,7 @@ void AES::InvSubBytes() {
 void AES::KeyExpansion(const coder::ByteArray& key, Word *keySchedule) const {
 
     // Key consistency check.
-    if (key.getLength() != keySize) {
+    if (key.length() != keySize) {
             throw BadParameterException("AES ExpandKey: Invalid key size");
     }
 

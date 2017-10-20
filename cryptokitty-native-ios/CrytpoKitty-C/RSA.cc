@@ -30,13 +30,13 @@ coder::ByteArray RSA::i2osp(const BigInteger& x, size_t xLen) {
         std::cout << "x = " << x << std::endl;
         std::cout << "xLen = " << xLen << std::endl;
         std::cout << "xb = " << xb.toString() << std::endl;
-        std::cout << "xb length = " << xb.getLength() << std::endl;
+        std::cout << "xb length = " << xb.length() << std::endl;
         throw BadParameterException("Integer too large");
     }*/
 
     //std::cout << "i2sop x = " << x << std::endl;
     coder::ByteArray work(x.getEncoded());
-    if (work.getLength() > xLen) {
+    if (work.length() > xLen) {
         if (work[0] == 0 && (work[1] & 0x80) != 0) {
             // BigInteger encoding places a sign byte in the LSB when necessary.
             // It needs to be removed to make the encoded integer the specified
@@ -47,7 +47,7 @@ coder::ByteArray RSA::i2osp(const BigInteger& x, size_t xLen) {
             throw BadParameterException("Invalid specified length");
         }
     }
-    coder::ByteArray pad(xLen - work.getLength());
+    coder::ByteArray pad(xLen - work.length());
     pad.append(work);
 
     //std::cout << "worked = " << worked << std::endl;

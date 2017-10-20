@@ -65,10 +65,26 @@
 
 }
 
+-(NSString*)getString {
+
+    std::string str;
+    *rsaCodec >> str;
+    return [NSString stringWithUTF8String:str.c_str()];
+
+}
+
 - (void)putBlock:(NSData *)block {
 
     coder::ByteArray bytes(reinterpret_cast<const uint8_t*>(block.bytes), block.length);
     *rsaCodec << bytes;
+
+}
+
+- (void)putString:(NSString *)str {
+
+    const char *cstr = [str cStringUsingEncoding:NSUTF8StringEncoding];
+    std::string instr(cstr);
+    *rsaCodec << instr;
 
 }
 

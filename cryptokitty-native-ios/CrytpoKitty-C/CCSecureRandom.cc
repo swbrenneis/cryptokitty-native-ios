@@ -49,7 +49,7 @@ uint64_t CCSecureRandom::nextLong() {
  */
 void CCSecureRandom::nextBytes(coder::ByteArray& bytes) {
     
-    size_t size = bytes.getLength();
+    size_t size = bytes.length();
     std::unique_ptr<uint8_t[]> rbytes(new uint8_t[size]);
     CCRandomGenerateBytes(rbytes.get(), size);
     bytes.copy(0, rbytes.get(), 0, size);

@@ -58,7 +58,7 @@ coder::ByteArray PKCS1rsassa::emsaPKCS1Encode(const coder::ByteArray& M, size_t 
     coder::ByteArray T;
     T.append(algorithmOID);
     T.append(H);
-    size_t tLen = T.getLength();
+    size_t tLen = T.length();
 
     // 3. If emLen < tLen + 11, output "intended encoded message length too
     //    short" and stop.
@@ -157,7 +157,7 @@ PKCS1rsassa::verify(const RSAPublicKey& K, const coder::ByteArray& M,
     // If the length of the signature S is not k octets,
     // output "invalid signature" and stop.
     size_t k = K.getBitLength() / 8;
-    if (S.getLength() != k) {
+    if (S.length() != k) {
         return false;
     }
 
