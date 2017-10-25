@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		551A18461FA136B00050C93C /* coder_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A18451FA136B00050C93C /* coder_iOS.framework */; };
 		552062101F8EA6850015A9A9 /* gmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 5520620F1F8EA6850015A9A9 /* gmp.h */; };
 		5520625B1F8EA7870015A9A9 /* SHA512.cc in Sources */ = {isa = PBXBuildFile; fileRef = 552062131F8EA7800015A9A9 /* SHA512.cc */; };
 		5520625C1F8EA7870015A9A9 /* AuthenticationException.h in Headers */ = {isa = PBXBuildFile; fileRef = 552062141F8EA7800015A9A9 /* AuthenticationException.h */; };
@@ -101,7 +102,6 @@
 		557D29721F8E7D5B008606E3 /* cryptokitty_native_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D29681F8E7D5B008606E3 /* cryptokitty_native_ios.framework */; };
 		557D29771F8E7D5B008606E3 /* cryptokitty_native_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D29761F8E7D5B008606E3 /* cryptokitty_native_iosTests.m */; };
 		557D29791F8E7D5B008606E3 /* cryptokitty_native_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 557D296B1F8E7D5B008606E3 /* cryptokitty_native_ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		557D29911F8E8518008606E3 /* coder_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D29901F8E8518008606E3 /* coder_iOS.framework */; };
 		557D2A521F8E91E4008606E3 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D2A511F8E91E4008606E3 /* libgmp.a */; };
 		557D2A541F8E922F008606E3 /* cryptokitty_native_ios.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 557D29681F8E7D5B008606E3 /* cryptokitty_native_ios.framework */; };
 /* End PBXBuildFile section */
@@ -131,6 +131,7 @@
 
 /* Begin PBXFileReference section */
 		551A18391FA0BB2E0050C93C /* ErrorCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ErrorCodes.h; sourceTree = "<group>"; };
+		551A18451FA136B00050C93C /* coder_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = coder_iOS.framework; path = "../../../Library/Developer/Xcode/DerivedData/coder_iOS-agqnydbktmdwsnaymknbuctojuje/Build/Products/Debug-iphoneos/coder_iOS.framework"; sourceTree = "<group>"; };
 		5520620F1F8EA6850015A9A9 /* gmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gmp.h; sourceTree = "<group>"; };
 		552062131F8EA7800015A9A9 /* SHA512.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SHA512.cc; sourceTree = "<group>"; };
 		552062141F8EA7800015A9A9 /* AuthenticationException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationException.h; sourceTree = "<group>"; };
@@ -228,7 +229,6 @@
 		557D29711F8E7D5B008606E3 /* cryptokitty-native-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cryptokitty-native-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		557D29761F8E7D5B008606E3 /* cryptokitty_native_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cryptokitty_native_iosTests.m; sourceTree = "<group>"; };
 		557D29781F8E7D5B008606E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		557D29901F8E8518008606E3 /* coder_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = coder_iOS.framework; path = ../../../Library/Frameworks/coder_iOS.framework; sourceTree = "<group>"; };
 		557D2A511F8E91E4008606E3 /* libgmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgmp.a; path = ../../../Library/Frameworks/libgmp.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -237,8 +237,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				551A18461FA136B00050C93C /* coder_iOS.framework in Frameworks */,
 				557D2A521F8E91E4008606E3 /* libgmp.a in Frameworks */,
-				557D29911F8E8518008606E3 /* coder_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,8 +409,8 @@
 		557D29871F8E7E2D008606E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				551A18451FA136B00050C93C /* coder_iOS.framework */,
 				557D2A511F8E91E4008606E3 /* libgmp.a */,
-				557D29901F8E8518008606E3 /* coder_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -758,7 +758,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = SP3EMN3UU4;
+				DEVELOPMENT_TEAM = YSKMP8WLKB;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -773,6 +773,8 @@
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Frameworks",
 				);
+				"OTHER_CFLAGS[arch=*]" = "-fembed-bitcode";
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.secomm.cryptokitty-native-ios";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -786,7 +788,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = SP3EMN3UU4;
+				DEVELOPMENT_TEAM = YSKMP8WLKB;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -801,6 +803,8 @@
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Frameworks",
 				);
+				"OTHER_CFLAGS[arch=*]" = "-fembed-bitcode";
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.secomm.cryptokitty-native-ios";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
