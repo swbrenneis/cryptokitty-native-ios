@@ -127,10 +127,19 @@ coder::ByteArray OAEPrsaes::emeOAEPDecode(size_t k, const coder::ByteArray& EM) 
     }
     
     bool found = false;
+    // The 0x01 byte has to be at the length of the hash + the original size of PS + 1
+    // The original size of PS is k - mLen - (2 * hLen) - 2
+    // k = the size of the key in bytes.
+    // mLen is the length of M (original message).
+    // hLen is the size of the digest in bytes.
     size_t index = hLen;
     while (!found && index < DB.length()) {
+        // PS should be all zeros, so the 0x01 byte should be the first non-zero byte.
         if (DB[index] == 0x01) {
             found = true;
+        }
+        else if (DB[index] != 0) {
+            throw DecryptionException();
         }
         else {
             index++;
@@ -140,13 +149,12 @@ coder::ByteArray OAEPrsaes::emeOAEPDecode(size_t k, const coder::ByteArray& EM) 
         throw DecryptionException();				
     }
     coder::ByteArray PS(DB.range(hLen, index - hLen));
-    for (uint32_t i = 0; i < PS.length(); ++i) {
-        if (PS[i] != 0) {
-            throw DecryptionException();
-        }
+    coder::ByteArray M(DB.range(hLen + PS.length() + 1));
+    if (PS.length() != (k - M.length() - (2 * hLen) - 2)) {
+        throw DecryptionException();
     }
 
-    return DB.range(found + 1, DB.length() - found - 1);
+    return M;
 
 }
 
@@ -160,7 +168,7 @@ coder::ByteArray OAEPrsaes::emeOAEPEncode(size_t k, const coder::ByteArray&  M) 
     // zero octets.  The length of PS may be zero.
     uint32_t hLen = digest->getDigestLength();
     size_t mLen = M.length();
-    coder::ByteArray PS(k - mLen - (2 * hLen) - 2);
+    coder::ByteArray PS(k - mLen - (2 * hLen) - 2, 0);
 
     // c. Concatenate lHash, PS, a single octet with hexadecimal value
     //    0x01, and the message M to form a data block DB of length k -

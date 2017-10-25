@@ -130,6 +130,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		551A18391FA0BB2E0050C93C /* ErrorCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ErrorCodes.h; sourceTree = "<group>"; };
 		5520620F1F8EA6850015A9A9 /* gmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gmp.h; sourceTree = "<group>"; };
 		552062131F8EA7800015A9A9 /* SHA512.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SHA512.cc; sourceTree = "<group>"; };
 		552062141F8EA7800015A9A9 /* AuthenticationException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationException.h; sourceTree = "<group>"; };
@@ -281,6 +282,7 @@
 				552062AA1F8EA8960015A9A9 /* CKSHA1.mm */,
 				552062AF1F8EA8960015A9A9 /* CKSHA256.h */,
 				552062B21F8EA8960015A9A9 /* CKSHA256.mm */,
+				551A18391FA0BB2E0050C93C /* ErrorCodes.h */,
 			);
 			path = Wrappers;
 			sourceTree = "<group>";

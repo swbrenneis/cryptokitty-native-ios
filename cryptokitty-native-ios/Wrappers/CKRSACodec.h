@@ -14,7 +14,7 @@
 
 - (instancetype)initWithData:(NSData*)data;
 
-- (void)decrypt:(CKRSAPrivateKey*)key;
+- (void)decrypt:(CKRSAPrivateKey*)key withError:(NSError**) error;
 
 - (NSData*)encrypt:(CKRSAPublicKey*)key;
 

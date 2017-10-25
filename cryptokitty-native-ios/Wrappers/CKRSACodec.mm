@@ -8,6 +8,8 @@
 
 #import "CKRSACodec.h"
 #import "RSACodec.h"
+#import "EncodingException.h"
+#import "ErrorCodes.h"
 #import <coder_iOS/ByteArray.h>
 
 @interface CKRSACodec ()
@@ -39,9 +41,17 @@
     delete rsaCodec;
 }
 
-- (void)decrypt:(CKRSAPrivateKey *)key {
+- (void)decrypt:(CKRSAPrivateKey *)key withError:(NSError**)error {
 
-    rsaCodec->decrypt(*reinterpret_cast<RSAPrivateKey*>(key.privateKey));
+    try {
+        rsaCodec->decrypt(*reinterpret_cast<RSAPrivateKey*>(key.privateKey));
+    }
+    catch (EncodingException& e) {
+        NSDictionary *errorDictionary = @{ NSLocalizedDescriptionKey : [NSString stringWithUTF8String:e.what()] };
+        *error = [NSError errorWithDomain:[[NSBundle mainBundle] bundleIdentifier]
+                                     code:RSA_DECRYPTION_ERROR
+                                 userInfo:errorDictionary];
+    }
 
 }
 
